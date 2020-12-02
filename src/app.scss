@@ -1,0 +1,32 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  background-color: #EBEBEB;
+}
+
+* {
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #00000040;
+  }
+
+  scrollbar-color: #00000040 transparent;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  scrollbar-width: 8px;
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+  }
+}

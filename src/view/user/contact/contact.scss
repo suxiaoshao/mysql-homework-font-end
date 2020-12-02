@@ -1,0 +1,11 @@
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: auto;
+  .contact-item {
+    width: 20%;
+    min-width: 200px;
+    margin: 20px;
+  }
+}
