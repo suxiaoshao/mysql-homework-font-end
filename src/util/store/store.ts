@@ -56,20 +56,22 @@ export function createUseStoreFunc<Data>(data: Data): () => [Data, (newData: Dat
   };
 }
 
-// export function useStore<Data>(
-//   getData: () => Data,
-//   addWatch: (newFunc: Func<Data>) => number,
-//   setData: (newData: Data) => void,
-//   removeWatch: (flag: number) => void,
-// ): [Data, (newData: Data) => void] {
-//   const [value, setValue] = useState<Data>(getData());
-//   useEffect(() => {
-//     const flag = addWatch((newData) => {
-//       setValue(newData);
-//     });
-//     return () => {
-//       removeWatch(flag);
-//     };
-//   }, [addWatch, removeWatch]);
-//   return [value, setData];
-// }
+export function createUseStore<Data>(
+  getData: () => Data,
+  addWatch: (newFunc: Func<Data>) => number,
+  setData: (newData: Data) => void,
+  removeWatch: (flag: number) => void,
+): () => [Data, (newData: Data) => void] {
+  return (): [Data, (newData: Data) => void] => {
+    const [value, setValue] = useState<Data>(getData());
+    useEffect(() => {
+      const flag = addWatch((newData) => {
+        setValue(newData);
+      });
+      return () => {
+        removeWatch(flag);
+      };
+    }, []);
+    return [value, setData];
+  };
+}

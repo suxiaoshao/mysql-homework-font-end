@@ -3,9 +3,11 @@ import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { AirlineSeatReclineNormal, Domain, ExitToApp, People, Train, TransferWithinAStation } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import Sidebar from '../../../components/sidebar/sidebar';
+import { useToken } from '../../../util/store/token';
 
 export default function AdminSidebar(props: { children?: React.ReactNode; className: string }): JSX.Element {
   const router = useHistory();
+  const [, setToken] = useToken();
   return (
     <Sidebar
       className={props.className}
@@ -75,7 +77,12 @@ export default function AdminSidebar(props: { children?: React.ReactNode; classN
       }
       otherList={
         <React.Fragment>
-          <ListItem button>
+          <ListItem
+            button
+            onClick={() => {
+              setToken('');
+            }}
+          >
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>

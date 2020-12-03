@@ -3,12 +3,14 @@ import { Route } from 'react-router-dom';
 import Station from './station/station';
 import GetRide from './getRide/getRide';
 import Train from './train/train';
-import Trip from './trip/trip';
+import Travel from './travel/travel';
 import Passengers from './passengers/passengers';
+import LoginDialog from './components/login/loginDialog';
 
 export default function AdminRoute(): JSX.Element {
   return (
     <React.Fragment>
+      <LoginDialog />
       <Route path="/admin/station" exact>
         <Station />
       </Route>
@@ -19,7 +21,7 @@ export default function AdminRoute(): JSX.Element {
         <Train />
       </Route>
       <Route path="/admin/trip" exact>
-        <Trip />
+        <Travel />
       </Route>
       <Route path="/admin/passengers" exact>
         <Passengers />
