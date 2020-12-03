@@ -2,9 +2,11 @@ import React from 'react';
 import AdminSidebar from '../components/sidebar';
 import { useALlStation } from '../../../util/store/allStation';
 import MyTable from '../../../components/myTable/myTable';
-import { Collapse, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Collapse, IconButton, TableBody, TableCell, TableRow } from '@material-ui/core';
 import { Station } from '../../../util/http/getAllStation';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import MyTableHead from '../../../components/myTable/myTableHead';
+import MyTableRow from '../../../components/myTable/myTableRow';
 
 function TableRowMore(props: Station): JSX.Element {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -35,23 +37,16 @@ export default function Station(): JSX.Element {
   return (
     <AdminSidebar className={'query-trains'}>
       <MyTable loading={false} errorString={undefined}>
-        <Table stickyHeader aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              {tableHeadList.map((value, index) => (
-                <TableCell key={value} align={index !== 0 ? 'right' : 'left'}>
-                  {value}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {allStation?.map((value) => (
-              <TableRowMore {...value} key={value.stationId} />
-            ))}
-          </TableBody>
-        </Table>
+        <MyTableHead tableHeadList={tableHeadList} more />
+        <TableBody>
+          {allStation?.map((value) => (
+            <MyTableRow openContent={123432134} key={value.stationId}>
+              <TableCell>{value.stationId}</TableCell>
+              <TableCell align="right">{value.stationName}</TableCell>
+              <TableCell align="right">{value.phoneNumber}</TableCell>
+            </MyTableRow>
+          ))}
+        </TableBody>
       </MyTable>
     </AdminSidebar>
   );

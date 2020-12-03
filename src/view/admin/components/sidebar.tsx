@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { AirlineSeatReclineNormal, Domain, ExitToApp, People, Train, TransferWithinAStation } from '@material-ui/icons';
+import { Domain, ExitToApp, People, Train, TransferWithinAStation } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import Sidebar from '../../../components/sidebar/sidebar';
 import { useToken } from '../../../util/store/token';
@@ -24,18 +24,6 @@ export default function AdminSidebar(props: { children?: React.ReactNode; classN
               <Domain />
             </ListItemIcon>
             <ListItemText>车站管理</ListItemText>
-          </ListItem>
-          <ListItem
-            button
-            onClick={() => {
-              router.push({ pathname: '/admin/getRide' });
-            }}
-            selected={router.location.pathname === '/admin/getRide'}
-          >
-            <ListItemIcon>
-              <AirlineSeatReclineNormal />
-            </ListItemIcon>
-            <ListItemText>乘车管理</ListItemText>
           </ListItem>
           <ListItem
             button

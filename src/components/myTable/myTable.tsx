@@ -1,4 +1,4 @@
-import { CircularProgress, Paper, TableContainer } from '@material-ui/core';
+import { CircularProgress, Paper, Table, TableContainer } from '@material-ui/core';
 import React from 'react';
 import './myTable.scss';
 
@@ -18,7 +18,9 @@ export default function MyTable(props: {
           <div>{props.errorString}</div>
         )
       ) : (
-        props.children
+        <Table stickyHeader aria-label="simple table">
+          {props.children}
+        </Table>
       )}
     </TableContainer>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Station from './station/station';
-import GetRide from './getRide/getRide';
 import Train from './train/train';
 import Travel from './travel/travel';
 import Passengers from './passengers/passengers';
@@ -13,9 +12,6 @@ export default function AdminRoute(): JSX.Element {
       <LoginDialog />
       <Route path="/admin/station" exact>
         <Station />
-      </Route>
-      <Route path="/admin/getRide" exact>
-        <GetRide />
       </Route>
       <Route path="/admin/train" exact>
         <Train />

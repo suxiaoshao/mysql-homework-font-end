@@ -1,20 +1,12 @@
 import React, { ChangeEvent } from 'react';
 import UserSidebar from '../components/sidebar';
-import {
-  IconButton,
-  InputAdornment,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TextField,
-} from '@material-ui/core';
+import { IconButton, InputAdornment, TableBody, TableCell, TableRow, TextField } from '@material-ui/core';
 import './queryTrip.scss';
 import { AccountCircle, Search } from '@material-ui/icons';
 import MyTable from '../../../components/myTable/myTable';
 import { useAsyncFunc } from '../../../util/hooks/useAsyncFunc';
 import { getTravelInfo } from '../../../util/http/getTravelInfo';
+import MyTableHead from '../../../components/myTable/myTableHead';
 
 const tableHead = ['乘客名', '订单号', '座位类型', '价格', '起点站', '终点站', '列车号'];
 export default function QueryTrip(): JSX.Element {
@@ -55,30 +47,20 @@ export default function QueryTrip(): JSX.Element {
         placeholder="使用用户id搜索"
       />
       <MyTable loading={loading} errorString={errorString}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {tableHead.map((value, index) => (
-                <TableCell key={value} align={index !== 0 ? 'right' : 'left'}>
-                  {value}
-                </TableCell>
-              ))}
+        <MyTableHead tableHeadList={tableHead} more={false} />
+        <TableBody>
+          {travelInfoData?.map((value) => (
+            <TableRow key={value.orderId}>
+              <TableCell>{value.passenger.passengerName}</TableCell>
+              <TableCell align="right">{value.orderId}</TableCell>
+              <TableCell align="right">{value.ticketType}</TableCell>
+              <TableCell align="right">{value.ticketPrice}</TableCell>
+              <TableCell align="right">{value.departureStation.stationName}</TableCell>
+              <TableCell align="right">{value.arrivalStation.stationName}</TableCell>
+              <TableCell align="right">{value.trainInfo.trainId}</TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {travelInfoData?.map((value) => (
-              <TableRow key={value.orderId}>
-                <TableCell>{value.passenger.passengerName}</TableCell>
-                <TableCell align="right">{value.orderId}</TableCell>
-                <TableCell align="right">{value.ticketType}</TableCell>
-                <TableCell align="right">{value.ticketPrice}</TableCell>
-                <TableCell align="right">{value.departureStation.stationName}</TableCell>
-                <TableCell align="right">{value.arrivalStation.stationName}</TableCell>
-                <TableCell align="right">{value.trainInfo.trainId}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+          ))}
+        </TableBody>
       </MyTable>
     </UserSidebar>
   );
