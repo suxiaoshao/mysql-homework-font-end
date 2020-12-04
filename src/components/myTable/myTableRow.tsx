@@ -1,8 +1,12 @@
-import { Box, Collapse, IconButton, TableCell, TableRow } from '@material-ui/core';
+import { Collapse, IconButton, TableCell, TableRow } from '@material-ui/core';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import React from 'react';
 
-export default function MyTableRow(props: { children: React.ReactNode; openContent: React.ReactNode }): JSX.Element {
+export default function MyTableRow(props: {
+  children: React.ReactNode;
+  openContent: React.ReactNode;
+  colSpan: number;
+}): JSX.Element {
   const [open, setOpen] = React.useState<boolean>(false);
   return (
     <React.Fragment>
@@ -15,10 +19,8 @@ export default function MyTableRow(props: { children: React.ReactNode; openConte
         {props.children}
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
-          <Collapse in={open}>
-            <Box margin={1}>{props.openContent}</Box>
-          </Collapse>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={props.colSpan}>
+          <Collapse in={open}>{props.openContent}</Collapse>
         </TableCell>
       </TableRow>
     </React.Fragment>

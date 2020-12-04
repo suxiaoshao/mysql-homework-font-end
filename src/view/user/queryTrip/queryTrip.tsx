@@ -47,7 +47,7 @@ export default function QueryTrip(): JSX.Element {
         placeholder="使用用户id搜索"
       />
       <MyTable loading={loading} errorString={errorString}>
-        <MyTableHead tableHeadList={tableHead} more={false} />
+        <MyTableHead tableHeadList={tableHead} />
         <TableBody>
           {travelInfoData?.map((value) => (
             <TableRow key={value.orderId}>

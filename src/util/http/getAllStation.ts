@@ -7,5 +7,5 @@ export interface Station {
 }
 
 export async function getAllStation(): Promise<Station[]> {
-  return await httpGet<undefined, Station[]>('/api/station/getAllStation', undefined);
+  return await httpGet<undefined, Station[]>('/api/station/all', undefined);
 }

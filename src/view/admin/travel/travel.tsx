@@ -26,10 +26,10 @@ export default function Travel(): JSX.Element {
   return (
     <AdminSidebar className="query-trains">
       <MyTable loading={loading} errorString={errorString}>
-        <MyTableHead tableHeadList={tableHead} more />
+        <MyTableHead tableHeadList={tableHead} more={<TableCell />} />
         <TableBody>
           {travelData?.map((value) => (
-            <MyTableRow openContent={112233} key={value.orderId}>
+            <MyTableRow openContent={112233} key={value.orderId} colSpan={8}>
               <TableCell>{value.passenger.passengerName}</TableCell>
               <TableCell align="right">{value.orderId}</TableCell>
               <TableCell align="right">{value.ticketType}</TableCell>

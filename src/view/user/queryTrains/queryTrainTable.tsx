@@ -12,7 +12,7 @@ export default function QueryTrainTable(props: {
 }): JSX.Element {
   return (
     <MyTable {...props}>
-      <MyTableHead tableHeadList={tableHeadList} more={false} />
+      <MyTableHead tableHeadList={tableHeadList} />
       <TableBody>
         {props.timesData?.map((value) => (
           <TableRow key={value.trainId}>

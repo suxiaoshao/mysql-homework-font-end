@@ -27,10 +27,10 @@ export default function Passengers(): JSX.Element {
   return (
     <AdminSidebar className="query-trains">
       <MyTable loading={loading} errorString={errorString}>
-        <MyTableHead tableHeadList={tableHead} more />
+        <MyTableHead tableHeadList={tableHead} more={<TableCell />} />
         <TableBody>
           {passengerData?.map((value: Passenger) => (
-            <MyTableRow key={value.passengerId} openContent={112233}>
+            <MyTableRow colSpan={6} key={value.passengerId} openContent={112233}>
               <TableCell>{value.passengerId}</TableCell>
               <TableCell align="right">{value.passengerName}</TableCell>
               <TableCell align="right">{value.gender}</TableCell>
