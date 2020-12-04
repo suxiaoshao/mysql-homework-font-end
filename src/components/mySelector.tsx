@@ -1,11 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import React from 'react';
 
-export default function MySelector(props: {
-  value: number;
-  onValueChange(newValue: number): void;
+export default function MySelector<T extends number | string>(props: {
+  value: T;
+  onValueChange(newValue: T): void;
   label: string;
-  itemList: { value: number; text: React.ReactNode }[];
+  itemList: { value: T; text: React.ReactNode }[];
 }): JSX.Element {
   return (
     <FormControl>
@@ -15,7 +15,7 @@ export default function MySelector(props: {
         id="demo-simple-select"
         value={props.value}
         onChange={(e) => {
-          props.onValueChange(e.target.value as number);
+          props.onValueChange(e.target.value as T);
         }}
       >
         {props.itemList.map((value) => (

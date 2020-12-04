@@ -8,30 +8,23 @@ import { useToken } from '../../../util/store/token';
 import { Passenger } from '../../../util/http/getTravelInfo';
 
 export default function AddPassenger(props: { onAddPassenger(newPassenger: Passenger): void }): JSX.Element {
-  const [genderList] = React.useState<{ text: string; value: number }[]>([
-    { value: 0, text: '男' },
-    { value: 1, text: '女' },
+  const [genderList] = React.useState<{ text: string; value: string }[]>([
+    { value: '男', text: '男' },
+    { value: '女', text: '女' },
   ]);
   const [token] = useToken();
-  const [gender, setGender] = React.useState<number>(-1);
+  const [gender, setGender] = React.useState<string>('');
   const [passengerId, setPassengerId] = React.useState<number>(0);
   const [passengerName, setPassengerName] = React.useState<string>('');
   const [idNumber, setIdNumber] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>('');
-  const genderValue = React.useMemo<string>(() => {
-    return (
-      genderList.find((value) => {
-        return value.value === gender;
-      })?.text ?? ''
-    );
-  }, [gender]);
   return (
     <MyAddCell
-      disableClick={genderValue === ''}
+      disableClick={gender === ''}
       title={'添加乘客'}
       onAdd={async () => {
         await httpToast(async () => {
-          return await postAddPassenger(passengerId, idNumber, passengerName, genderValue, phoneNumber, token);
+          return await postAddPassenger(passengerId, idNumber, passengerName, gender, phoneNumber, token);
         }, '添加成功').then((data) => {
           props.onAddPassenger(data);
         });
@@ -52,7 +45,7 @@ export default function AddPassenger(props: { onAddPassenger(newPassenger: Passe
           setPassengerName(e.target.value);
         }}
       />
-      <MySelector value={gender} onValueChange={setGender} label={'性别'} itemList={genderList} />
+      <MySelector<string> value={gender} onValueChange={setGender} label={'性别'} itemList={genderList} />
       <TextField
         label="电话号"
         type="tel"

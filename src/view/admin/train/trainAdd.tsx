@@ -49,7 +49,7 @@ export default function TrainAdd(props: { onAdd(newTrain: TrainData): void }): J
           setTrainType(e.target.value);
         }}
       />
-      <MySelector
+      <MySelector<number>
         value={startStationId}
         onValueChange={setStartStationId}
         label={'始发站'}
@@ -60,7 +60,7 @@ export default function TrainAdd(props: { onAdd(newTrain: TrainData): void }): J
           };
         })}
       />
-      <MySelector
+      <MySelector<number>
         value={destinationStationId}
         onValueChange={setDestinationStationId}
         label={'终点站'}

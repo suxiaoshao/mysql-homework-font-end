@@ -16,7 +16,7 @@ export default function UpdateTrain(
   const [destinationStationId, setDestinationStationId] = React.useState<number>(props.destinationStation.stationId);
   return (
     <Box margin={1} className="more-form">
-      <MySelector
+      <MySelector<number>
         value={startStationId}
         onValueChange={setStartStationId}
         label={'始发站'}
@@ -27,7 +27,7 @@ export default function UpdateTrain(
           };
         })}
       />
-      <MySelector
+      <MySelector<number>
         value={destinationStationId}
         onValueChange={setDestinationStationId}
         label={'终点站'}

@@ -10,10 +10,10 @@ import MyTableHead from '../../../components/myTable/myTableHead';
 
 const tableHead = ['乘客名', '订单号', '座位类型', '价格', '起点站', '终点站', '列车号'];
 export default function QueryTrip(): JSX.Element {
-  const [passengerId, setPassengerId] = React.useState<string>('');
+  const [passengerId, setPassengerId] = React.useState<number>(0);
   const [fn, loading, errorString, travelInfoData] = useAsyncFunc(
     async () => {
-      return await getTravelInfo(parseInt(passengerId));
+      return await getTravelInfo(passengerId);
     },
     [passengerId],
     [false, '暂无搜索', undefined],
@@ -23,8 +23,9 @@ export default function QueryTrip(): JSX.Element {
       <TextField
         label="用户id"
         value={passengerId}
+        type={'number'}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setPassengerId(!isNaN(parseInt(e.target.value)) ? String(parseInt(e.target.value)) : '');
+          setPassengerId(parseInt(e.target.value));
         }}
         variant="outlined"
         InputProps={{
@@ -35,7 +36,7 @@ export default function QueryTrip(): JSX.Element {
           ),
           endAdornment: (
             <IconButton
-              disabled={passengerId === ''}
+              disabled={passengerId === 0}
               onClick={() => {
                 fn();
               }}

@@ -7,11 +7,14 @@ import MyTable from '../../../components/myTable/myTable';
 import MyTableHead from '../../../components/myTable/myTableHead';
 import { TableBody, TableCell } from '@material-ui/core';
 import MyTableRow from '../../../components/myTable/myTableRow';
+import AddTravel from './AddTravel';
+import UpdateTravel from './updateTravel';
+import { TravelInfoData } from '../../../util/http/getTravelInfo';
 
 const tableHead = ['乘客名', '订单号', '座位类型', '价格', '起点站', '终点站', '列车号'];
 export default function Travel(): JSX.Element {
   const [token] = useToken();
-  const [fn, loading, errorString, travelData] = useAsyncFunc(
+  const [fn, loading, errorString, travelData, setTravelData] = useAsyncFunc(
     async () => {
       return await getAllTravel(token);
     },
@@ -26,10 +29,34 @@ export default function Travel(): JSX.Element {
   return (
     <AdminSidebar className="query-trains">
       <MyTable loading={loading} errorString={errorString}>
-        <MyTableHead tableHeadList={tableHead} more={<TableCell />} />
+        <MyTableHead
+          tableHeadList={tableHead}
+          more={
+            <AddTravel
+              onAdd={(newTravel) => {
+                const newTravelData = [...(travelData ?? []), newTravel];
+                setTravelData(newTravelData);
+              }}
+            />
+          }
+        />
         <TableBody>
-          {travelData?.map((value) => (
-            <MyTableRow openContent={112233} key={value.orderId} colSpan={8}>
+          {travelData?.map((value: TravelInfoData) => (
+            <MyTableRow
+              openContent={
+                <UpdateTravel
+                  {...value}
+                  onDelete={() => {
+                    const newTravelData = travelData?.filter((item) => {
+                      return item.orderId !== value.orderId;
+                    });
+                    setTravelData(newTravelData);
+                  }}
+                />
+              }
+              key={value.orderId}
+              colSpan={8}
+            >
               <TableCell>{value.passenger.passengerName}</TableCell>
               <TableCell align="right">{value.orderId}</TableCell>
               <TableCell align="right">{value.ticketType}</TableCell>
