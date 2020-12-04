@@ -12,15 +12,12 @@ axios.defaults.withCredentials = true;
 export default function QueryTrains(): JSX.Element {
   const [allMode, setAllMode] = React.useState<boolean>(true);
   const [activeStationId, setActiveStationId] = React.useState<number>(1);
+  const [gdcPrefix, setGdcPrefix] = React.useState<boolean>(false);
   const [fn, loading, errorString, timesData] = useAsyncFunc(
     async () => {
-      if (allMode) {
-        return await getTimesByDestinationStationId(0);
-      } else {
-        return await getTimesByDestinationStationId(activeStationId);
-      }
+      return await getTimesByDestinationStationId(allMode ? 0 : activeStationId, gdcPrefix);
     },
-    [allMode, activeStationId],
+    [allMode, activeStationId, gdcPrefix],
     [false, undefined, []],
   );
   React.useEffect(() => {
@@ -33,6 +30,8 @@ export default function QueryTrains(): JSX.Element {
         onActiveStationChange={setActiveStationId}
         allMode={allMode}
         onAllModeChange={setAllMode}
+        gdcPrefix={gdcPrefix}
+        onGdcPrefixChange={setGdcPrefix}
         onSearch={() => {
           fn();
         }}

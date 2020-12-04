@@ -7,6 +7,8 @@ export default function QueryTrainForm(props: {
   onAllModeChange(newMode: boolean): void;
   activeStationId: number;
   onActiveStationChange(newActive: number): void;
+  gdcPrefix: boolean;
+  onGdcPrefixChange(newGdcPrefix: boolean): void;
   onSearch(): void;
 }): JSX.Element {
   const [modeEl, setModeEl] = React.useState<HTMLButtonElement | null>(null);
@@ -20,7 +22,7 @@ export default function QueryTrainForm(props: {
             setModeEl(e.currentTarget);
           }}
         >
-          {props.allMode ? '全部查询' : '根据终点站查询'}
+          {props.allMode ? '全部终点站' : '根据终点站查询'}
         </Button>
         <Button
           disabled={props.allMode}
@@ -31,6 +33,13 @@ export default function QueryTrainForm(props: {
           {props.allMode
             ? '未确定'
             : allStation.find((value) => value.stationId === props.activeStationId)?.stationName ?? '未确定'}
+        </Button>
+        <Button
+          onClick={() => {
+            props.onGdcPrefixChange(!props.gdcPrefix);
+          }}
+        >
+          {props.gdcPrefix ? '动车/高铁' : '全部列车类型'}
         </Button>
         <Button
           onClick={() => {
@@ -54,7 +63,7 @@ export default function QueryTrainForm(props: {
             setModeEl(null);
           }}
         >
-          全部查询
+          全部终点站
         </MenuItem>
         <MenuItem
           selected={!props.allMode}

@@ -5,12 +5,13 @@ import { httpToast } from '../../../util/httpToast';
 import { postAddStation, postDeleteStation } from '../../../util/http/postAddStation';
 import { useToken } from '../../../util/store/token';
 import { useALlStation } from '../../../util/store/allStation';
+import { Station } from '../../../util/http/getAllStation';
 
-export default function UpdateStation(props: { stationId: number }): JSX.Element {
+export default function UpdateStation(props: Station): JSX.Element {
   const [token] = useToken();
   const [allStation, setAllStation] = useALlStation();
-  const [stationName, setStationName] = React.useState<string>('');
-  const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+  const [stationName, setStationName] = React.useState<string>(props.stationName);
+  const [phoneNumber, setPhoneNumber] = React.useState<string>(props.phoneNumber);
   return (
     <Box margin={1} className="more-form">
       <TextField

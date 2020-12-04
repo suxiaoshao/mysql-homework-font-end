@@ -10,7 +10,7 @@ export default function Home(): JSX.Element {
     <div className="home-father">
       <div className="home">
         <Typography variant="h3" component="h2" gutterBottom>
-          选择你的身份
+          火车站信息管理系统
         </Typography>
         <div className="home-button">
           <Button

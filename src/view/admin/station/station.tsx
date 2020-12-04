@@ -17,7 +17,7 @@ export default function Station(): JSX.Element {
         <MyTableHead tableHeadList={tableHeadList} more={<AddStation />} />
         <TableBody>
           {allStation?.map((value) => (
-            <MyTableRow openContent={<UpdateStation stationId={value.stationId} />} key={value.stationId} colSpan={4}>
+            <MyTableRow openContent={<UpdateStation {...value} />} key={value.stationId} colSpan={4}>
               <TableCell>{value.stationId}</TableCell>
               <TableCell align="right">{value.stationName}</TableCell>
               <TableCell align="right">{value.phoneNumber}</TableCell>

@@ -11,7 +11,7 @@ import AddTravel from './AddTravel';
 import UpdateTravel from './updateTravel';
 import { TravelInfoData } from '../../../util/http/getTravelInfo';
 
-const tableHead = ['乘客名', '订单号', '座位类型', '价格', '起点站', '终点站', '列车号'];
+const tableHead = ['订单号', '乘客姓名', '车次', '出发站', '到达站', '座位类型', '价格'];
 export default function Travel(): JSX.Element {
   const [token] = useToken();
   const [fn, loading, errorString, travelData, setTravelData] = useAsyncFunc(
@@ -57,13 +57,13 @@ export default function Travel(): JSX.Element {
               key={value.orderId}
               colSpan={8}
             >
-              <TableCell>{value.passenger.passengerName}</TableCell>
-              <TableCell align="right">{value.orderId}</TableCell>
-              <TableCell align="right">{value.ticketType}</TableCell>
-              <TableCell align="right">{value.ticketPrice}</TableCell>
+              <TableCell>{value.orderId}</TableCell>
+              <TableCell align="right">{value.passenger.passengerName}</TableCell>
+              <TableCell align="right">{value.trainInfo.trainId}</TableCell>
               <TableCell align="right">{value.departureStation.stationName}</TableCell>
               <TableCell align="right">{value.arrivalStation.stationName}</TableCell>
-              <TableCell align="right">{value.trainInfo.trainId}</TableCell>
+              <TableCell align="right">{value.ticketType}</TableCell>
+              <TableCell align="right">{value.ticketPrice}</TableCell>
             </MyTableRow>
           ))}
         </TableBody>
